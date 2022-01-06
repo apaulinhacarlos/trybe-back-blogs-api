@@ -9,54 +9,28 @@ module.exports = {
       },
       displayName: {
         type: Sequelize.STRING,
-        allowNull: {
-          args: false,
-          msg: '\"displayName\" is required',
-        },
-        validate: {
-          min: {
-            args: 8,
-            msg: '\"displayName\" length must be at least 8 characters long',
-          }, 
-        },
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: {
-          args: false,
-          msg: '\"email\" is required',
-        },
-        unique: {
-          msg: 'User already registered'
-        },
-        validate: {
-          notEmpty: {
-            msg: '\"email\" is required',
-          },
-          isEmail: {
-            msg: '\"email\" must be a valid email',
-          },
-        },
+        allowNull: false,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: {
-          args: false,
-          msg: '\"password\" is required',
-        },
-        validate: {
-          notEmpty: {
-            msg: '\"password\" is required',
-          },
-          len: {
-            args: [6,6], 
-            msg: '\"password\" length must be 6 characters long',
-          },
-        },
+        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
       },
+      // createdAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // },
+      // updatedAt: {
+      //   allowNull: false,
+      //   type: Sequelize.DATE
+      // }
     });
   },
 
