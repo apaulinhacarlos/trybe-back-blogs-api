@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     tableName: 'Users',
-    timestamps: false, // true obriga criar o createdAt e updateAt na migration
+    timestamps: false, // "timestamps: true" briga criação do createdAt e updateAt na migration
   });
   return User;
 };

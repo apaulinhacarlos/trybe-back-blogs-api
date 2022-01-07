@@ -22,7 +22,8 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
       },
-      // createdAt: {
+      // o não uso do createdAt e updatedAt obriga o uso "timestamps: false" no modelo
+      // createdAt: {  
       //   allowNull: false,
       //   type: Sequelize.DATE
       // },
