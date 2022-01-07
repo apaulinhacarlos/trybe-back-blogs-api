@@ -1,5 +1,5 @@
 const Joi = require('joi');
-// const { User } = require('../../../models');
+const { User } = require('../../../models');
 
 const EMAIL_MESSAGE = {
   'string.empty': '"email" is not allowed to be empty',
@@ -14,27 +14,26 @@ const PASSWORD_MESSAGE = {
 const isValidParams = async (email, password) => {
   const { error } = Joi.object({
     email: Joi.string()
-      .empty('')
+      .empty()
       .required()
       .messages(EMAIL_MESSAGE),
     password: Joi.string()
-      .empty('')
+      .empty()
       .required()
       .messages(PASSWORD_MESSAGE),
   }).validate({ email, password });
   return error;
 };
 
-const isEmailUsed = async (email) => {
-  const alreadyExists = await User.findAll({
-    limit: 1,
-    where: { email },
+const isValidUser = async (email, password) => {
+  const userFound = await User.findOne({
+    where: { email, password },
   });
-  if (alreadyExists.length) return false;
-  return true;
+  if (!userFound) return false;
+  return userFound.dataValues;
 };
 
 module.exports = {
   isValidParams,
-  isEmailUsed,
+  isValidUser,
 };

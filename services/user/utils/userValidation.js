@@ -24,12 +24,12 @@ const isValidParams = async (displayName, email, password) => {
       .messages(DISPLAY_NAME_MESSAGE),
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-      .empty('')
+      .empty()
       .required()
       .messages(EMAIL_MESSAGE),
     password: Joi.string()
       .min(6)
-      .empty('')
+      .empty()
       .required()
       .messages(PASSWORD_MESSAGE),
   }).validate({ displayName, email, password });
@@ -37,11 +37,10 @@ const isValidParams = async (displayName, email, password) => {
 };
 
 const isEmailUsed = async (email) => {
-  const alreadyExists = await User.findAll({
-    limit: 1,
+  const alreadyExists = await User.findOne({
     where: { email },
   });
-  if (alreadyExists.length) return false;
+  if (alreadyExists) return false;
   return true;
 };
 

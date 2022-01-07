@@ -5,21 +5,22 @@ module.exports = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     
-    // const tokenLogin = await loginService.login({ email, password });    
+    const login = await loginService.login({ email, password });    
 
-    // if (tokenLogin.details) {
-    //   return res
-    //     .status(StatusCodes.UNAUTHORIZED)
-    //     .json({ message: 'All fields must be filled' });
-    //   }
+    if (login.details) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: login.details[0].message });
+      }
 
-    // if (tokenLogin.incorrectUser) {
-    //   return res
-    //     .status(StatusCodes.UNAUTHORIZED)
-    //     .json({ message: tokenLogin.incorrectUser });
-    //   }
+      console.log(login);
+    if (login.doesNotExist) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: login.doesNotExist });
+      }
 
-    // return res.status(StatusCodes.OK).json({ token: tokenLogin });
+    return res.status(StatusCodes.OK).json(login);
   } catch (error) {
     next(error);
   }
