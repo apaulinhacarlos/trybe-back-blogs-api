@@ -1,13 +1,15 @@
 const error = require('./error');
-const { generateToken } = require('./generateToken');
-// const auth = require('./auth');
+const generateToken = require('./generateToken');
+const verifyToken = require('./verifyToken');
+const auth = require('./auth');
 // const authAdmin = require('./authAdmin');
 // const upload = require('./upload');
 
 module.exports = {
   error,
   generateToken,
-  // auth,
+  verifyToken,
+  auth,
   // authAdmin,
   // upload,
 };
