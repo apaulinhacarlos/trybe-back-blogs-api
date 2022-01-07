@@ -5,22 +5,21 @@ module.exports = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     
-    const login = await loginService.login({ email, password });    
+    const loginToken = await loginService.login({ email, password });    
 
-    if (login.details) {
+    if (loginToken.details) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ message: login.details[0].message });
+        .json({ message: loginToken.details[0].message });
       }
 
-      console.log(login);
-    if (login.doesNotExist) {
+    if (loginToken.doesNotExist) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ message: login.doesNotExist });
+        .json({ message: loginToken.doesNotExist });
       }
 
-    return res.status(StatusCodes.OK).json(login);
+    return res.status(StatusCodes.OK).json(loginToken);
   } catch (error) {
     next(error);
   }

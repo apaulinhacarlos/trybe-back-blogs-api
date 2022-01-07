@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
         .json({ message: newUser.alreadyExists });
       }
 
-    return res.status(StatusCodes.CREATED).json({ user: newUser }); // retornar o TOKEN
+    return res.status(StatusCodes.CREATED).json(newUser);
   } catch (error) {
     next(error);
   }
