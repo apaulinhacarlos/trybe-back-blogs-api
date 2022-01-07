@@ -1,5 +1,5 @@
 const express = require('express');
-// const { error } = require('../middleware');
+const { error } = require('./middleware');
 const routes = require('./routes');
 
 const PORT = 3000;
@@ -15,6 +15,6 @@ app.get('/', (request, response) => {
 
 app.use('/', routes);
 
-// app.use(error);
+app.use(error);
   
-  app.listen(PORT, () => console.log(`conectado na porta ${PORT}`));
+app.listen(PORT, () => console.log(`conectado na porta ${PORT}`));

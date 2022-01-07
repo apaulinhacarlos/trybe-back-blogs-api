@@ -13,15 +13,14 @@ module.exports = async (req, res, next) => {
     //     .json({ message: newUser.emailAlreadyExists });
     //   }
 
-    // if (newUser.details) {
-    //   return res
-    //     .status(StatusCodes.BAD_REQUEST)
-    //     .json({ message: 'Invalid entries. Try again.' });
-    //   }
+    if (newUser.details) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: newUser.details[0].message });
+      }
 
-    return res.status(StatusCodes.CREATED).json({ user: newUser });
+    return res.status(StatusCodes.CREATED).json({ user: newUser }); // retornar o TOKEN
   } catch (error) {
-    // next(error);
-    console.log(error);
+    next(error);
   }
 };
