@@ -5,7 +5,7 @@ const middleware = require('../middleware');
 const router = express.Router({ mergeParams: true });
 
 router.post('/', middleware.auth, categorieController.create);
-// router.get('/', middleware.auth, userController.findAll);
+router.get('/', middleware.auth, categorieController.findAll);
 // router.get('/:id', middleware.auth, userController.findById);
 
 module.exports = router;
