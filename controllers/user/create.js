@@ -6,17 +6,17 @@ module.exports = async (req, res, next) => {
     const { displayName, email, password, image } = req.body;
     
     const newUser = await userService.create({ displayName, email, password, image });
-
-    // if (newUser.emailAlreadyExists) {
-    //   return res
-    //     .status(StatusCodes.CONFLICT)
-    //     .json({ message: newUser.emailAlreadyExists });
-    //   }
-
+  
     if (newUser.details) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: newUser.details[0].message });
+      }
+    
+    if (newUser.alreadyExists) {
+      return res
+        .status(StatusCodes.CONFLICT)
+        .json({ message: newUser.alreadyExists });
       }
 
     return res.status(StatusCodes.CREATED).json({ user: newUser }); // retornar o TOKEN

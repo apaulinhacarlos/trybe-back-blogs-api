@@ -13,7 +13,7 @@ const isEmailUsed = async (email) => {
 };
   
 const isValidParams = async (displayName, email, password) => {
-  const { validation } = Joi.object({
+  const { error } = Joi.object({
     displayName: Joi.string()
       .min(8)
       .messages({
@@ -36,7 +36,7 @@ const isValidParams = async (displayName, email, password) => {
         'any.required': '"password" is required',
       }),
   }).validate({ displayName, email, password });
-  return validation;
+  return error;
 };
 
 module.exports = {
