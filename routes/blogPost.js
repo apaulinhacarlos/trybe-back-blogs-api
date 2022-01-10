@@ -1,9 +1,9 @@
 const express = require('express');
-const postController = require('../controllers/post');
+const blogPostController = require('../controllers/blogPost');
 const middleware = require('../middleware');
 
 const router = express.Router({ mergeParams: true });
 
-router.post('/', middleware.auth, postController.create);
+router.post('/', middleware.auth, blogPostController.create);
 
 module.exports = router;

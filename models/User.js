@@ -30,5 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Users',
     timestamps: false, // "timestamps: true" briga criação do createdAt e updateAt na migration
   });
+
+  User.associate = (models) => {
+    User.hasOne(models.BlogPost, { foreignKey: 'userId', as: 'user' });
+  };
   return User;
 };

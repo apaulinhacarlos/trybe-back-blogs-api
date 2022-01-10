@@ -7,11 +7,11 @@ const validateContent = {
 };
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('BlogPost', {
+  const BlogPost = sequelize.define('BlogPost', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, validate: validateTitle },
     content: { type: DataTypes.STRING, validate: validateContent },
-    userId: { type: DataTypes.INTEGER, foreignKey: true },
+    userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   },
@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated',
   });
 
-  User.associate = (models) => {
-    User.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+  BlogPost.associate = (models) => {
+    BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
   };
   
-  return User;
+  return BlogPost;
 };

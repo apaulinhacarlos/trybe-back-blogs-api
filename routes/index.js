@@ -2,7 +2,7 @@ const express = require('express');
 const user = require('./user');
 const login = require('./login');
 const categories = require('./categories');
-const post = require('./post');
+const blogPost = require('./blogPost');
 
 const router = express.Router({ mergeParams: true });
 
@@ -12,6 +12,6 @@ router.use('/login', login);
 
 router.use('/categories', categories);
 
-router.use('/post', post);
+router.use('/post', blogPost);
 
 module.exports = router;
