@@ -8,11 +8,6 @@ module.exports = async ({ userId, title, content, categoryIds }) => {
   const validatedCategorie = await blogPostValidation.categoryExists(categoryIds);
   if (!validatedCategorie) return { categoryDoesNotExists: '"categoryIds" not found' };
 
-  // console.log(validatedCategorie);
-  // const user = await BlogPost.findAll({
-  //   include: { model: User, as: 'user' },
-  // });
-
   const newPost = await BlogPost.create({ userId, title, content, categoryIds });
 
   const { updated, published, ...newPostWithoutDate } = newPost.dataValues;

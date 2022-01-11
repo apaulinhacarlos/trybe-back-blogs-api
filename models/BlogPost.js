@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     title: { type: DataTypes.STRING, validate: validateTitle },
     content: { type: DataTypes.STRING, validate: validateContent },
     userId: DataTypes.INTEGER,
+    categoryIds: DataTypes.ARRAY(DataTypes.INTEGER), // ??
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   },
@@ -23,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+    // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
+    // BlogPost.hasMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
   };
   
   return BlogPost;
