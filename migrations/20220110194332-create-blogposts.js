@@ -27,9 +27,6 @@ module.exports = {
           key: 'id',
         }
       },
-      categoryIds: {
-        type: Sequelize.ARRAY(Sequelize.ENUM),
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -12,12 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  Categorie.associate = (models) => {
-    Categorie.belongsTo(models.User, { foreignKey: 'id', as: 'user' });
-    Categorie.belongsToMany(models.BlogPost,
-      { as: 'blogPosts', through: 'BlogPost', foreignKey: 'id', otherKey: 'id' });
-    // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
-  };
+  // Categorie.associate = (models) => {
+  //   Categorie.belongsTo(models.User, { foreignKey: 'id', as: 'user' });
+  //   Categorie.belongsToMany(models.BlogPost,
+  //     { as: 'blogPosts', through: 'BlogPost', foreignKey: 'id', otherKey: 'id' });
+  //   // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
+  // };
   
+  Categorie.associate = (models) => {
+    Categorie.belongsToMany(models.BlogPost, { through: 'BlogPostCategories' });
+  };
+
   return Categorie;
 };

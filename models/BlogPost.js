@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, validate: validateTitle },
     content: { type: DataTypes.STRING, validate: validateContent },
-    userId: DataTypes.INTEGER,
-    categoryIds: DataTypes.ARRAY(DataTypes.INTEGER), // ??
+    userId: DataTypes.INTEGER, // ??
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   },
@@ -22,10 +21,15 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated',
   });
 
+  // BlogPost.associate = (models) => {
+  //   BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+  //   // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
+  //   // BlogPost.hasMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
+  // };
+
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-    // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
-    // BlogPost.hasMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
+    BlogPost.belongsToMany(models.Categorie, { through: 'BlogPostCategories' });
   };
   
   return BlogPost;
