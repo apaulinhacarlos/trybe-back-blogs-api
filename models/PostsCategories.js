@@ -11,7 +11,7 @@ module.exports = (sequelize, _DataTypes) => {
       otherKey: 'categoryId',
     });
     models.Category.belongsToMany(models.BlogPost, {
-      as: 'posts', // ? vi no codigo do samuel que ele deixou as: 'posts'
+      as: 'posts', // ? 
       through: PostsCategories,
       foreignKey: 'categoryId',
       otherKey: 'postId',

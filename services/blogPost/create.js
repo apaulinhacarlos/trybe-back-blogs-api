@@ -1,4 +1,4 @@
-const { BlogPost, PostsCategories } = require('../../models');
+const { BlogPost } = require('../../models');
 const blogPostValidation = require('./utils/blogPostValidation');
 
 module.exports = async ({ userId, title, content, categoryIds }) => {
@@ -8,14 +8,7 @@ module.exports = async ({ userId, title, content, categoryIds }) => {
   const validatedCategory = await blogPostValidation.categoryExists(categoryIds);
   if (!validatedCategory) return { categoryDoesNotExists: '"categoryIds" not found' };
 
-  const newPost = await BlogPost.create({ 
-    userId,
-    title,
-    content,
-    // categoryIds,
-    teste: [{ categorieId: categoryIds }],
-  },
-  { include: [{ model: PostsCategories, as: 'teste' }] });
+  const newPost = await BlogPost.create({ userId, title, content });
 
   const { updated, published, ...newPostWithoutDate } = newPost.dataValues;
 
