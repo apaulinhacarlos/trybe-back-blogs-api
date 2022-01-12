@@ -6,6 +6,7 @@ const validateContent = {
   notEmpty: { msg: '"content" is required' },
 };
 
+// eslint-disable-next-line max-lines-per-function
 module.exports = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -21,15 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated',
   });
 
-  // BlogPost.associate = (models) => {
-  //   BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-  //   // BlogPost.belongsToMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
-  //   // BlogPost.hasMany(models.Categorie, { as: 'categories', through: 'BlogPostCategorie', foreignKey: 'id', otherKey: 'id' });
-  // };
-
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-    BlogPost.belongsToMany(models.Categorie, { through: 'BlogPostCategories' });
+    BlogPost.belongsToMany(models.Categorie, { through: 'BlogPostCategories' }); 
+    BlogPost.hasMany(models.BlogPostCategorie, { as: 'teste', foreignKey: 'blogPostId' }); // NAO SEI SE PRECISA DISSO
   };
   
   return BlogPost;

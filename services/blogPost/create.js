@@ -1,4 +1,4 @@
-const { BlogPost, Categorie } = require('../../models');
+const { BlogPost, BlogPostCategorie } = require('../../models');
 const blogPostValidation = require('./utils/blogPostValidation');
 
 module.exports = async ({ userId, title, content, categoryIds }) => {
@@ -12,11 +12,10 @@ module.exports = async ({ userId, title, content, categoryIds }) => {
     userId,
     title,
     content,
-    Categorie: [
-      1,
-    ],
+    // categoryIds,
+    teste: [{ categorieId: categoryIds }],
   },
-  { include: Categorie });
+  { include: [{ model: BlogPostCategorie, as: 'teste' }] });
 
   const { updated, published, ...newPostWithoutDate } = newPost.dataValues;
 

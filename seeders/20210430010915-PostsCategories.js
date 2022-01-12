@@ -1,20 +1,20 @@
 module.exports = {
   up: async (queryInterface, _Sequelize) => {
-    await queryInterface.bulkInsert('PostsCategories',
+    await queryInterface.bulkInsert('BlogPostCategories',
       [
         {
-          postId: 1,
-          categoryId: 1,
+          blogPostId: 1,
+          categorieId: 1, // arrumar esses nomes
         },
         {
-          postId: 2,
-          categoryId: 2,
+          blogPostId: 2,
+          categorieId: 2,
         },
 
       ], { timestamps: false });
   },
 
   down: async (queryInterface, _Sequelize) => {
-    await queryInterface.bulkDelete('PostsCategories', null, {});
+    await queryInterface.bulkDelete('BlogPostCategories', null, {});
   },
 };

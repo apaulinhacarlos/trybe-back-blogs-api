@@ -6,10 +6,12 @@ module.exports = {
       blogPostId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
       },
       categorieId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
       },
     });
   },
