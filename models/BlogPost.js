@@ -6,7 +6,6 @@ const validateContent = {
   notEmpty: { msg: '"content" is required' },
 };
 
-// eslint-disable-next-line max-lines-per-function
 module.exports = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -24,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-    BlogPost.belongsToMany(models.Categorie, { through: 'BlogPostCategories' }); 
-    BlogPost.hasMany(models.BlogPostCategorie, { as: 'teste', foreignKey: 'blogPostId' }); // NAO SEI SE PRECISA DISSO
+    BlogPost.belongsToMany(models.Category, { through: 'PostsCategories' }); 
+    BlogPost.hasMany(models.PostsCategories, { as: 'teste', foreignKey: 'postId' }); // NAO SEI SE PRECISA DISSO
   };
   
   return BlogPost;

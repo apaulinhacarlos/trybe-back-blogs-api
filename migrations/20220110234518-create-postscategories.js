@@ -2,13 +2,13 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('BlogPostCategories', {
-      blogPostId: {
+    await queryInterface.createTable('PostsCategories', {
+      postId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
       },
-      categorieId: {
+      categoryId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
@@ -17,6 +17,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('BlogPostCategories');
+    await queryInterface.dropTable('PostsCategories');
   }
 };

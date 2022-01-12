@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Categorie } = require('../../../models');
+const { Category } = require('../../../models');
 
 const TITLE_MESSAGE = {
   'string.empty': '"title" is required',
@@ -36,7 +36,7 @@ const isValidParams = async (title, content, categoryIds) => {
 };
 
 const categoryExists = async (categoryIds) => {
-  const categories = await Categorie.findAll({
+  const categories = await Category.findAll({
     attributes: ['id'],
     where: {
       id: categoryIds,
