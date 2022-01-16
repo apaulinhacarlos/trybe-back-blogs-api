@@ -9,6 +9,7 @@ module.exports = async ({ email, password }) => {
   if (!userFound) return { doesNotExist: 'Invalid fields' };
 
   const { password: _password, ...userWithoutPassword } = userFound;
+
   const token = generateToken(userWithoutPassword);
 
   return { token };

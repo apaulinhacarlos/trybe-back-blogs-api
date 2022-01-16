@@ -47,7 +47,22 @@ const categoryExists = async (categoryIds) => {
   return false;
 };
 
+const isValidParamsUpdate = async (title, content) => {
+  const { error } = Joi.object({
+    title: Joi.string()
+      .empty()
+      .required()
+      .messages(TITLE_MESSAGE),
+    content: Joi.string()
+      .empty()
+      .required()
+      .messages(CONTENT_MESSAGE),
+  }).validate({ title, content });
+  return error;
+};
+
 module.exports = {
   isValidParams,
   categoryExists,
+  isValidParamsUpdate,
 };
