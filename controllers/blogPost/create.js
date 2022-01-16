@@ -3,8 +3,9 @@ const blogPostService = require('../../services/blogPost');
 
 module.exports = async (req, res, next) => {
   try {
-    const { id: userId } = req.user; // APAGAR DATA VALUES
     const { title, content, categoryIds } = req.body;
+
+    const { id: userId } = req.user;
 
     const newBlogPost = await blogPostService.create({ userId, title, content, categoryIds });
   
