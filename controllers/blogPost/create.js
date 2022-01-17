@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     const { title, content, categoryIds } = req.body;
 
     const { id: userId } = req.user;
-
+    
     const newBlogPost = await blogPostService.create({ userId, title, content, categoryIds });
   
     if (newBlogPost.details) {

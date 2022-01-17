@@ -15,7 +15,11 @@ module.exports = (req, res, next) => {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Expired or invalid token' });
     }
 
-    req.user = user;
+    if (user.dataValues) {
+      req.user = user.dataValues;
+    } else {
+      req.user = user;
+    }
     
     next();
   } catch (error) {

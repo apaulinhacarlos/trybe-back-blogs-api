@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Category } = require('../../../models');
+const { Category, BlogPost } = require('../../../models');
 
 const TITLE_MESSAGE = {
   'string.empty': '"title" is required',
@@ -61,8 +61,17 @@ const isValidParamsUpdate = async (title, content) => {
   return error;
 };
 
+const isValidUser = async (userId, postId) => {
+  const validUser = await BlogPost.findOne({
+    where: { id: postId },
+  });
+  if (validUser && userId !== validUser.userId) return false;
+  return true;
+};
+
 module.exports = {
   isValidParams,
   categoryExists,
   isValidParamsUpdate,
+  isValidUser,
 };

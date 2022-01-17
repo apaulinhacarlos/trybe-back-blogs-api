@@ -5,19 +5,16 @@ module.exports = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { title, content, categoryIds } = req.body;
+    const { id: userId } = req.user;
 
-    const updateBlogPost = await blogPostService.update({ id, title, content, categoryIds });
-  
-    if (updateBlogPost.details) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: updateBlogPost.details[0].message });
-      }
+    const updateBlogPost = await blogPostService.update({
+      userId, id, title, content, categoryIds,
+    });
 
-    if (updateBlogPost.categoryError) {
+    if (updateBlogPost.message) {
       return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: updateBlogPost.categoryError });
+        .status(updateBlogPost.statusCode)
+        .json({ message: updateBlogPost.message });
       }
 
     return res.status(StatusCodes.OK).json(updateBlogPost);
