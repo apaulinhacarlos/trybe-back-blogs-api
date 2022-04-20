@@ -7,11 +7,19 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
+        // references: {
+        //   model: 'BlogPosts', // esse nome vem da migration
+        //   key: 'id'
+        // }
       },
       categoryId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         // TALVEZ EU PRECISE REFERENCIAR A TABELA AQUI
+        // references: {
+        //   model: 'Categories', // esse nome vem da migration
+        //   key: 'id'
+        // }
       },
     });
   },

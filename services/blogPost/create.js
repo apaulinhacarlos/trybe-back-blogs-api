@@ -1,4 +1,4 @@
-const { BlogPost } = require('../../models');
+const { BlogPost } = require('../../models'); // esse nome vem da model
 const blogPostValidation = require('./utils/blogPostValidation');
 
 module.exports = async ({ userId, title, content, categoryIds }) => {
